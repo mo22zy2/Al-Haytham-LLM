@@ -6,5 +6,9 @@ class ModelConfig:
     d_model : int = 768
     max_seq_len : int= 1024
     dropout:float =0.1
-    
-    
+    n_heads:int = 12
+    qkv_bais:bool = False
+
+    @property
+    def d_k(self):
+        return self.d_model/self.n_heads

@@ -3,7 +3,6 @@ import pandas as pd
 from huggingface_hub import (hf_hub_download,
                              login as hf_login)
 from cleaning import clean_dataframe , normalize_text , prepare_document
-from huggingface_hub import login as hf_login
 from dotenv import load_dotenv
 import os
 
