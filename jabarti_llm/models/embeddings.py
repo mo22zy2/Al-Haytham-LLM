@@ -5,14 +5,14 @@ class InputEmbedding(nn.Module):
     def __init__(self,config):
         super().__init__()
         
-        self.max_seq_len=config.max_seq_len
+        self.seq_len=config.seq_len
         self.dropout= nn.Dropout(config.dropout) #Droput Layer
         self.token_embedding= nn.Embedding(
             config.vocab_size,
             config.d_model
         )
         self.postional_embedding = nn.Embedding(
-            config.max_seq_len,
+            config.seq_len,
             config.d_model
         )
         
@@ -22,10 +22,10 @@ class InputEmbedding(nn.Module):
         
         _ , seq_len = input_ids.shape
         
-        if seq_len > self.max_seq_len:
+        if seq_len > self.seq_len:
             raise ValueError(
                 f"sequance length {seq_len} exceeds"
-                f"max_seq_len = {self.max_seq_len}"
+                f"seq_len = {self.seq_len}"
             )
             
         postions = torch.arange(
@@ -38,5 +38,4 @@ class InputEmbedding(nn.Module):
         
         pos = self.postional_embedding(postions)
         
-        return self.dropout(tokens+pos)
-        
+        return self.dropout(tokens+pos) # (B,seq_len,d_model)
