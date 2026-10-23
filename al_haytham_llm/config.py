@@ -2,6 +2,7 @@ from dataclasses import dataclass
 
 @dataclass
 class ModelConfig:
+    
     vocab_size :int = 32_000
     seq_len : int= 1024
     
