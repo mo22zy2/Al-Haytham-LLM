@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
-from haytham_llm.models.attention import MultiHeadAttention
-from haytham_llm.models.feedforward import FeedForward
+from al_haytham_llm.models.attention import MultiHeadAttention
+from al_haytham_llm.models.feedforward import FeedForward
 
 
 
@@ -19,18 +19,16 @@ class TransformerBlock(nn.Module):
         self.dropout_layer = nn.Dropout(config.dropout)
         
         
-    def forward (self ,x, kv_cache, use_cache ):
+    def forward(self, hidden_states, kv_cache, use_cache):
         
-        attention_output , updated_cache = self.attention(
-            self.layer_norm1(x) , kv_cache, use_cache
+        attention_output, updated_kv_cache = self.attention(
+            self.layer_norm1(hidden_states), kv_cache, use_cache
         )
         
-        x += self.dropout_layer(attention_output)
+        hidden_states += self.dropout_layer(attention_output)
         
-        feedforward_output = self.feedforward(self.layer_norm2(x))
+        feedforward_output = self.feedforward(self.layer_norm2(hidden_states))
         
-        x += self.dropout_layer(feedforward_output)
+        hidden_states += self.dropout_layer(feedforward_output)
         
-        
-        
-        return x , updated_cache
+        return hidden_states, updated_kv_cache

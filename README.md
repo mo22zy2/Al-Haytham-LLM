@@ -1,4 +1,4 @@
-# Running `Haytham`
+`Al-Haytham`
 
 A bilingual (Arabic + English) GPT built from scratch. This guide takes you from
 a clean checkout to a **fully finetuned chat model**, then shows how to test it,
@@ -7,7 +7,7 @@ trace training with Trackio, and where every artifact lands.
 Named after **Ibn al-Haytham (Alhazen, c. 965–1040)**, the "father of modern optics" who pioneered the scientific method in his *Book of Optics*. His systematic, evidence-based approach to understanding light and vision mirrors this project's goal: building a bilingual (Arabic/English) LLM from first principles, with transparent, reproducible training.
 
 For *why* each piece is built the way it is, work through the hands-on
-notebooks in [`haytham_llm/assets/notebooks/`](haytham_llm/assets/notebooks).
+notebooks in [`al_haytham_llm/assets/notebooks/`](al_haytham_llm/assets/notebooks).
 
 ---
 
@@ -42,7 +42,7 @@ python run_pretrain.py --epochs 15 \
   --batch-size 56 --accumulation-steps 4 \
   --lr 6e-4 --warmup 500 --weight-decay 0.1 --eval-every 100 \
   --print-every 100 --sample-every 100 --shuffle-seed 42 \
-  --checkpoint-dir ../checkpoints/haytham-512x8-ep15 \
+  --checkpoint-dir ../checkpoints/al-haytham-512x8-ep15 \
   --save-every 100
 ```
 
@@ -59,7 +59,7 @@ into the model at the end and saved as `finetune_chat_lora_final.pt` inside
 **Sample Run**
 
 ```bash
-python run_finetune_lora.py --resume ../checkpoints/haytham-512x8-ep15/pretrain_final.pt \
+python run_finetune_lora.py --resume ../checkpoints/al-haytham-512x8-ep15/pretrain_final.pt \
   --steps 60 --warmup 10 --limit 2000 \
   --batch-size 8 --lr 2e-5 --lora-r 8 --lora-alpha 16 \
   --print-every 10 --sample-every 30 --shuffle-seed 42
@@ -69,11 +69,11 @@ python run_finetune_lora.py --resume ../checkpoints/haytham-512x8-ep15/pretrain_
 
 ```bash
 python run_finetune_lora.py \
-  --resume ../checkpoints/haytham-512x8-ep15/pretrain_final.pt \
+  --resume ../checkpoints/al-haytham-512x8-ep15/pretrain_final.pt \
   --epochs 100 --batch-size 56 --accumulation-steps 4 \
   --lr 2e-5 --warmup 100 --lora-r 256 --lora-alpha 512 \
   --print-every 100 --sample-every 500 --shuffle-seed 42 --shuffle \
-  --checkpoint-dir /workspace/checkpoints/haytham-512x8-lora \
+  --checkpoint-dir /workspace/checkpoints/al-haytham-512x8-lora \
   --save-every 2000
 ```
 
@@ -87,7 +87,7 @@ python run_finetune_lora.py \
 **Run**
 
 ```bash
-trackio show --project haytham-llm --host 0.0.0.0
+trackio show --project al-haytham-llm --host 0.0.0.0
 ```
 
 ### Using CloudFlare to Access TrackIO Panel Remotely
