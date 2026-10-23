@@ -3,7 +3,7 @@ requires = ["setuptools>=61"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "jabarti-llm"
+name = "haytham-llm"
 version = "0.1.0"
 description = "A bilingual (Arabic + English) GPT, built from scratch"
 
@@ -23,7 +23,7 @@ dependencies = [
 ]
 
 [tool.setuptools.packages.find]
-include = ["jabarti_llm*"]
+include = ["haytham_llm*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

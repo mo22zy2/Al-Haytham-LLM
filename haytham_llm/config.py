@@ -8,8 +8,8 @@ class ModelConfig:
     d_model : int = 768
     d_ff: int = 4 * 768  # Default for GPT2 = 4 * d_model
     n_heads:int = 12
-    
-    qkv_bais:bool = False
+    n_layers: int = 12
+    qkv_bias:bool = False
     dropout:float =0.1
 
     @property
