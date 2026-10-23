@@ -12,6 +12,7 @@ class MultiHeadAttention(nn.Module):
         self.d_model = config.d_model
         self.n_heads = config.n_heads
         self.qkv_bias = config.qkv_bias
+        
         self.d_k = config.d_k
 
         # Linear layers that project the input into Query, Key, and Value
@@ -34,8 +35,8 @@ class MultiHeadAttention(nn.Module):
         # False means the token must not attend to that position
         mask = torch.tril(
             torch.ones(
-                config.max_seq_len,
-                config.max_seq_len,
+                config.seq_len,
+                config.seq_len,
                 dtype=torch.bool
             )
         )
